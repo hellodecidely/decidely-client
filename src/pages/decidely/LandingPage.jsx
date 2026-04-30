@@ -32,7 +32,7 @@ const LandingPage = () => {
         <div className="container">
           <Link to="/" className="navbar-brand d-flex align-items-center gap-2">
             <span className="bg-primary text-white fw-bold rounded-3 p-2 fs-5">D</span>
-            <span className="fw-bold fs-3 text-dark">decidely</span>
+            <span className="fw-bold fs-3 text-dark">Decidely</span>
           </Link>
           
           <button 
