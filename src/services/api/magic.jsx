@@ -1,7 +1,10 @@
 import api from './index';
 
+// Get API base URL from environment
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const magicAPI = {
-  // Generate magic link
+  // 🔒 GENERATE MAGIC LINK - Requires Auth
   generateMagicLink: async (projectId, email, approvalIds = [], sendEmail = true) => {
     try {
       const response = await api.post('/magic/generate', {
@@ -17,58 +20,65 @@ const magicAPI = {
     }
   },
 
-  // Validate magic link (public)
+  // ✅ VALIDATE MAGIC LINK - PUBLIC (No auth)
   validateMagicLink: async (token) => {
     try {
-      const response = await api.get(`/magic/validate/${token}`);
-      return response.data;
+      const response = await fetch(`${API_BASE_URL}/magic/validate/${token}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      return await response.json();
     } catch (error) {
       console.error('Error in validateMagicLink:', error);
       throw error;
     }
   },
 
-  // Get access data via magic link (public)
+  // ✅ GET ACCESS VIA MAGIC LINK - PUBLIC (No auth)
   getAccessViaMagicLink: async (token) => {
     try {
-      const response = await api.get(`/magic/access/${token}`);
-      return response.data;
+      const response = await fetch(`${API_BASE_URL}/magic/access/${token}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      return await response.json();
     } catch (error) {
       console.error('Error in getAccessViaMagicLink:', error);
       throw error;
     }
   },
 
-  // Submit decision via magic link (public)
+  // ✅ SUBMIT DECISION VIA MAGIC LINK - PUBLIC (No auth)
   submitDecisionViaMagic: async (token, approvalId, status, comment = '') => {
     try {
-      const response = await api.post(`/magic/decision/${token}`, {
-        approvalId,
-        status,
-        comment
+      const response = await fetch(`${API_BASE_URL}/magic/decision/${token}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ approvalId, status, comment })
       });
-      return response.data;
+      return await response.json();
     } catch (error) {
       console.error('Error in submitDecisionViaMagic:', error);
       throw error;
     }
   },
 
-  // Add comment via magic link (public)
+  // ✅ ADD COMMENT VIA MAGIC LINK - PUBLIC (No auth)
   addCommentViaMagic: async (token, approvalId, comment) => {
     try {
-      const response = await api.post(`/magic/comment/${token}`, {
-        approvalId,
-        comment
+      const response = await fetch(`${API_BASE_URL}/magic/comment/${token}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ approvalId, comment })
       });
-      return response.data;
+      return await response.json();
     } catch (error) {
       console.error('Error in addCommentViaMagic:', error);
       throw error;
     }
   },
 
-  // Get all magic links (agency)
+  // 🔒 GET ALL MAGIC LINKS - Requires Auth (Agency only)
   getAllMagicLinks: async (params = {}) => {
     try {
       const queryParams = new URLSearchParams(params).toString();
@@ -81,7 +91,7 @@ const magicAPI = {
     }
   },
 
-  // Get magic link stats
+  // 🔒 GET MAGIC LINK STATS - Requires Auth
   getMagicLinkStats: async () => {
     try {
       const response = await api.get('/magic/stats');
@@ -92,7 +102,7 @@ const magicAPI = {
     }
   },
 
-  // Get single magic link
+  // 🔒 GET SINGLE MAGIC LINK - Requires Auth
   getMagicLinkById: async (id) => {
     try {
       const response = await api.get(`/magic/links/${id}`);
@@ -103,7 +113,7 @@ const magicAPI = {
     }
   },
 
-  // Revoke magic link
+  // 🔒 REVOKE MAGIC LINK - Requires Auth
   revokeMagicLink: async (id) => {
     try {
       const response = await api.delete(`/magic/links/${id}`);
@@ -114,7 +124,7 @@ const magicAPI = {
     }
   },
 
-  // Resend magic link email
+  // 🔒 RESEND MAGIC LINK EMAIL - Requires Auth
   resendMagicLinkEmail: async (id) => {
     try {
       const response = await api.post(`/magic/links/${id}/resend`);
