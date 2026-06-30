@@ -392,7 +392,7 @@ const Usage = () => {
                   <div className="col-md-8">
                     <h5 className="fw-bold mb-2">Need more resources?</h5>
                     <p className="text-muted mb-md-0">
-                      Upgrade to Pro for 20 projects, 200 approvals/month, and 40MB file uploads.
+                      Upgrade to Pro for 40 projects, 200 approvals/month, and 40MB file uploads.
                     </p>
                   </div>
                   <div className="col-md-4 text-md-end">
