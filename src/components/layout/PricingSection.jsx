@@ -32,7 +32,7 @@ const PricingSection = () => {
       description: 'Perfect for freelancers testing the waters',
       features: [
         { name: '2 workspaces', included: true },
-        { name: '2 projects', included: true },
+        { name: '4 projects', included: true },
         { name: '20 approvals per month', included: true },
         { name: 'Video uploads up to 20MB', included: true },
         { name: 'Images and Document uploads up to 10MB', included: true },
@@ -50,7 +50,7 @@ const PricingSection = () => {
       description: 'For growing agencies that need more power',
       features: [
         { name: '20 workspaces', included: true },
-        { name: '20 projects', included: true },
+        { name: '40 projects', included: true },
         { name: '200 approvals per month', included: true },
         { name: 'Video uploads up to 40MB', included: true },
         { name: 'Images and Document uploads up to 20MB', included: true },
